@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "grammy": "^1.38.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
