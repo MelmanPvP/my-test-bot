@@ -33,7 +33,7 @@ bot.hears(/ping/i, async (ctx) => {
 bot.hears(/what did he say/i ,async (ctx) => {
     await ctx.replyWithAnimation("https://media.tenor.com/KM98YNR1lUYAAAAM/what-did.gif")
 })
-bot.on("message", (ctx) => ctx.reply("Got another message!"));
+bot.on("message", (ctx) => ctx.reply("Еще сообщение!"));
 
 // Now that you specified how to handle messages, you can start your bot.
 // This will connect to the Telegram servers and wait for messages.
