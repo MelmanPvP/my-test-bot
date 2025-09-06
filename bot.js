@@ -16,7 +16,8 @@ bot.command("start", async (ctx) => {
 });
 // Handle other messages.
 bot.command('help', async (ctx) => {
-    await ctx.reply('<code>/id</code> - получить свой id\nНапиши <b>what did he say</b> в любом регистре - получил gif-мем', { parse_mode: "HTML" });
+    await ctx.reply('<code>/id</code> - получить свой chat-id\nНапиши <b>what did he say</b> в любом регистре - получил gif-мем' +
+        '\n<code>/remind</code> время сообщение - получить напоминание через определённое время.', { parse_mode: "HTML" });
 });
 bot.command("id", async (ctx) => {
     await ctx.reply(`Ваш chat_id:<b>${ctx.chat.id}</b>`, { parse_mode: "HTML" });
@@ -28,7 +29,38 @@ bot.hears(/ping/i, async (ctx) => {
 bot.hears(/what did he say/i, async (ctx) => {
     await ctx.replyWithAnimation("https://media.tenor.com/KM98YNR1lUYAAAAM/what-did.gif");
 });
-bot.on("message", (ctx) => ctx.reply("Got another message!"));
+bot.command('remind', async (ctx) => {
+    const parts = ctx.message.text.split(" ");
+    if (parts.length < 2) {
+        return ctx.reply('Используй так: /remind 10s сообщение');
+    }
+    const time = parts[1];
+    const text = parts.slice(2).join('') || 'Напоминание!';
+    const match = time.match(/^(\d+)([smhd])$/);
+    if (!match) {
+        return ctx.reply('Неправильный формат! Используй число + s/m/h/d .');
+    }
+    const value = parseInt(match[1], 10);
+    const unit = match[2];
+    let delay = 0;
+    switch (unit) {
+        case 's':
+            delay = value * 1000;
+            break;
+        case 'm':
+            delay = value * 1000 * 60;
+            break;
+        case 'h':
+            delay = value * 1000 * 60 * 60;
+            break;
+        case 'd': delay = value * 1000 * 60 * 60 * 24;
+    }
+    ctx.reply(`Ок, напомню через ${value} ${unit}.`);
+    setTimeout(() => {
+        ctx.reply(text);
+    }, delay);
+});
+bot.on("message", (ctx) => ctx.reply("Извини,пока не понимаю что ты написал.У меня лапки)"));
 // Now that you specified how to handle messages, you can start your bot.
 // This will connect to the Telegram servers and wait for messages.
 // Start the bot.
