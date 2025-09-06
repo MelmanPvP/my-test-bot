@@ -35,7 +35,7 @@ bot.command('remind', async (ctx) => {
         return ctx.reply('Используй так: /remind 10s сообщение');
     }
     const time = parts[1];
-    const text = parts.slice(2).join('') || 'Напоминание!';
+    const text = parts.slice(2).join(' ') || 'Напоминание!';
     const match = time.match(/^(\d+)([smhd])$/);
     if (!match) {
         return ctx.reply('Неправильный формат! Используй число + s/m/h/d .');
