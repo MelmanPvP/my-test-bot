@@ -17,7 +17,7 @@ bot.command("start", async (ctx) => {
 // Handle other messages.
 bot.command('help', async (ctx) => {
     await ctx.reply('<code>/id</code> - получить свой chat-id\nНапиши <b>what did he say</b> в любом регистре - получил gif-мем' +
-        '\n<code>/remind</code> время сообщение - получить напоминание через определённое время.', { parse_mode: "HTML" });
+        '\n<code>/remind</code> время(с/м/ч/д) сообщение - получить напоминание через определённое время.', { parse_mode: "HTML" });
 });
 bot.command("id", async (ctx) => {
     await ctx.reply(`Ваш chat_id:<b>${ctx.chat.id}</b>`, { parse_mode: "HTML" });
