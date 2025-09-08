@@ -38,7 +38,7 @@ bot.command('remind', async (ctx) => {
     const text = parts.slice(2).join(' ') || 'Напоминание!';
     const match = time.match(/^(\d+)([smhd])$/);
     if (!match) {
-        return ctx.reply('Неправильный формат! Используй число + с/м/ч/д .');
+        return ctx.reply('Неправильный формат! Используй число + с/м/ч/д + сообщение .');
     }
     const value = parseInt(match[1], 10);
     const unit = match[2];
