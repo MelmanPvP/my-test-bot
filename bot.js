@@ -32,7 +32,7 @@ bot.hears(/what did he say/i, async (ctx) => {
 bot.command('remind', async (ctx) => {
     const parts = ctx.message.text.split(" ");
     if (parts.length < 2) {
-        return ctx.reply('Используй так: /remind 10с/м/ч/д сообщение');
+        return ctx.reply('Используй так: <code>/remind</code> 10с/м/ч/д сообщение', { parse_mode: "HTML" });
     }
     const time = parts[1];
     const text = parts.slice(2).join(' ') || 'Напоминание!';
