@@ -37,26 +37,26 @@ bot.hears(/what did he say/i ,async (ctx) => {
 bot.command('remind',async (ctx) => {
     const parts = ctx.message.text.split(" ");
     if (parts.length < 2) {
-        return ctx.reply('Используй так: /remind 10s сообщение')
+        return ctx.reply('Используй так: /remind 10с/м/ч/д сообщение')
     }
     const time = parts[1]
     const text = parts.slice(2).join(' ') || 'Напоминание!'
     const match = time.match(/^(\d+)([smhd])$/)
     if (!match) {
-        return ctx.reply('Неправильный формат! Используй число + s/m/h/d .')
+        return ctx.reply('Неправильный формат! Используй число + с/м/ч/д .')
     }
     const value = parseInt(match[1], 10);
     const unit = match[2];
 
     let delay = 0;
     switch (unit) {
-        case 's':delay = value * 1000;
+        case 'с':delay = value * 1000;
         break;
-        case 'm':delay = value * 1000 * 60;
+        case 'м':delay = value * 1000 * 60;
         break
-        case 'h':delay = value * 1000 * 60 * 60
+        case 'ч':delay = value * 1000 * 60 * 60
             break
-        case 'd':delay = value * 1000 * 60 * 60 * 24
+        case 'д':delay = value * 1000 * 60 * 60 * 24
     }
 
     ctx.reply(`Ок, напомню через ${value} ${unit}.`)
