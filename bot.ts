@@ -51,13 +51,13 @@ bot.command('remind',async (ctx) => {
 
     let delay = 0;
     switch (unit) {
-        case 'с':delay = value * 1000;
+        case 'с':case"s":delay = value * 1000;
         break;
-        case 'м':delay = value * 1000 * 60;
+        case 'м':case"m":delay = value * 1000 * 60;
         break
-        case 'ч':delay = value * 1000 * 60 * 60
+        case 'ч':case"h":delay = value * 1000 * 60 * 60
             break
-        case 'д':delay = value * 1000 * 60 * 60 * 24
+        case 'д':case"d":delay = value * 1000 * 60 * 60 * 24
     }
 
     ctx.reply(`Ок, напомню через ${value} ${unit}.`)
