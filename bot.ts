@@ -65,7 +65,7 @@ bot.command('remind',async (ctx) => {
                 timeParts.push(`${value}д`)
         }
 
-        ctx.reply(`Ок, напомню через ${value} ${unit}.`)
+        ctx.reply(`Ок, напомню через ${timeParts.join(' ')}.`)
         setTimeout(()=>{
             ctx.reply(`Напоминаю: ${text}`)
         },delay)
