@@ -66,7 +66,7 @@ bot.command('remind', async (ctx) => {
                 delay = value * 1000 * 60 * 60 * 24;
                 timeParts.push(`${value}д`);
         }
-        ctx.reply(`Ок, напомню через ${value} ${unit}.`);
+        ctx.reply(`Ок, напомню через ${timeParts.join(' ')}.`);
         setTimeout(() => {
             ctx.reply(`Напоминаю: ${text}`);
         }, delay);
