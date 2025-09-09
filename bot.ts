@@ -73,7 +73,7 @@ bot.command('remind',async (ctx) => {
 
 })
 
-
+console.log('Updated!')
 bot.on("message", (ctx) => ctx.reply("Извини,пока не понимаю что ты написал.У меня лапки)"));
 
 // Now that you specified how to handle messages, you can start your bot.
