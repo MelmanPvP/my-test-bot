@@ -42,28 +42,31 @@ bot.command('remind',async (ctx) => {
     }
     const time = parts[1]
     const text = parts.slice(2).join(' ') || 'Напоминание!'
-    const match = time.match(/^(\d+)([smhdсмчд])$/)
-    if (!match) {
+    const matches = [...time.matchAll(/^(\d+)([smhdсмчд])/g)]
+    if (matches.length === 0) {
         return ctx.reply('Неправильный формат! Используй число + с/м/ч/д + сообщение.')
     }
-    const value = parseInt(match[1], 10);
-    const unit = match[2];
+    for (const match of matches) {
+        const value = parseInt(match[1], 10);
+        const unit = match[2];
 
-    let delay = 0;
-    switch (unit) {
-        case 'с':case"s":delay = value * 1000;
-        break;
-        case 'м':case"m":delay = value * 1000 * 60;
-        break
-        case 'ч':case"h":delay = value * 1000 * 60 * 60
-            break
-        case 'д':case"d":delay = value * 1000 * 60 * 60 * 24
+        let delay = 0;
+        switch (unit) {
+            case 'с':case"s":delay = value * 1000;
+                break;
+            case 'м':case"m":delay = value * 1000 * 60;
+                break
+            case 'ч':case"h":delay = value * 1000 * 60 * 60
+                break
+            case 'д':case"d":delay = value * 1000 * 60 * 60 * 24
+        }
+
+        ctx.reply(`Ок, напомню через ${value} ${unit}.`)
+        setTimeout(()=>{
+            ctx.reply(`Напоминаю: ${text}`)
+        },delay)
     }
 
-    ctx.reply(`Ок, напомню через ${value} ${unit}.`)
-    setTimeout(()=>{
-        ctx.reply(`Напоминаю: ${text}`)
-    },delay)
 })
 
 
