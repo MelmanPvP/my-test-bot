@@ -44,21 +44,25 @@ bot.command('remind',async (ctx) => {
     const text = parts.slice(2).join(' ') || 'Напоминание!'
     const matches = [...time.matchAll(/^(\d+)([smhdсмчд])/g)]
     if (matches.length === 0) {
-        return ctx.reply('Неправильный формат! Используй число + с/м/ч/д + сообщение.')
+        return ctx.reply('Неправильный формат! Используй число + с/м/ч/д(можно несколько единиц одновременно) + сообщение.')
     }
     for (const match of matches) {
         const value = parseInt(match[1], 10);
         const unit = match[2];
-
+        let timeParts:string[] = []
         let delay = 0;
         switch (unit) {
             case 'с':case"s":delay = value * 1000;
+            timeParts.push(`${value}с`)
                 break;
             case 'м':case"m":delay = value * 1000 * 60;
+                timeParts.push(`${value}м`)
                 break
             case 'ч':case"h":delay = value * 1000 * 60 * 60
+                timeParts.push(`${value}ч`)
                 break
             case 'д':case"d":delay = value * 1000 * 60 * 60 * 24
+                timeParts.push(`${value}д`)
         }
 
         ctx.reply(`Ок, напомню через ${value} ${unit}.`)
